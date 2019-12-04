@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     padding: 30,
   },
   inner: {
-    minHeight: Platform.OS === 'android' ? Dimensions.get("window").height - 68 : Dimensions.get("screen").height - 180,
+    minHeight: Platform.OS === 'android' ? Dimensions.get("window").height - 108 : Dimensions.get("screen").height - 180,
   },
 });
 

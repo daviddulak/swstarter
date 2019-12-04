@@ -22,20 +22,22 @@ export class Results extends Component {
     });
   };
   componentDidMount() {
-    swapi
-      .search(this.props.queryType, this.props.query)
-      .then(response => {
-        this.setState({
-          searchComplete: true,
-          results: response.results,
+    if (this.props.queryType && this.props.query) {
+      swapi
+        .search(this.props.queryType, this.props.query)
+        .then(response => {
+          this.setState({
+            searchComplete: true,
+            results: response.results,
+          });
+        })
+        .catch(response => {
+          console.log(response);
+          this.setState({
+            searchComplete: true,
+          });
         });
-      })
-      .catch(response => {
-        console.log(response);
-        this.setState({
-          searchComplete: true,
-        });
-      });
+    }
   }
   renderResults() {
     if (!this.state.searchComplete) {

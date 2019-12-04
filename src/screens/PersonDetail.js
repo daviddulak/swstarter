@@ -34,17 +34,19 @@ export class PersonDetail extends Component {
   }
 
   componentDidMount() {
-    swapi
-      .getPersonDeep(this.props.id)
-      .then(response => {
-        console.log(response);
-        this.setState({
-          item: response,
+    if (this.props.id) {
+      swapi
+        .getPersonDeep(this.props.id)
+        .then(response => {
+          console.log(response);
+          this.setState({
+            item: response,
+          });
+        })
+        .catch(response => {
+          console.log(response);
         });
-      })
-      .catch(response => {
-        console.log(response);
-      });
+    }
   }
 
   render() {
