@@ -56,7 +56,7 @@ export class PersonDetail extends Component {
         <ScreenContainer>
           <View style={styles.container}>
             <View style={styles.containerUpper}>
-              <H1>{get(this.state, 'item.name', 'Unknown')}</H1>
+              <H1>{get(this.state, 'item.name', '···')}</H1>
               <View style={styles.section}>
                 <H2 withHorizontalRule>Details</H2>
                 <View style={styles.row}>

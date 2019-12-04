@@ -56,7 +56,7 @@ export class FilmDetail extends Component {
         <ScreenContainer>
           <View style={styles.container}>
             <View style={styles.containerUpper}>
-              <H1>{get(this.state, 'item.title', 'Unknown')}</H1>
+              <H1>{get(this.state, 'item.title', '···')}</H1>
               <View style={styles.section}>
                 <H2 withHorizontalRule>Opening Crawl</H2>
                 <StandardText>{get(this.state, 'item.opening_crawl', '···')}</StandardText>

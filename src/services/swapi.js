@@ -68,8 +68,9 @@ export class swapi {
       let films = response.films || [];
       let filmsDetail = [];
       for (let i=0; i<films.length; i++) {
-        let id = Common.idFromUrl(films[i]);
-        filmsDetail.push({id: id, name: id});
+        const id = Common.idFromUrl(films[i]);
+        const film = await this.getFilm(id);
+        filmsDetail.push({id: id, name: film.title});
       }
       response.films = filmsDetail;
       return response;
@@ -117,8 +118,9 @@ export class swapi {
       let people = response.characters || [];
       let peopleDetail = [];
       for (let i = 0; i < people.length; i++) {
-        let id = Common.idFromUrl(people[i]);
-        peopleDetail.push({ id: id, name: id });
+        const id = Common.idFromUrl(people[i]);
+        const person = await this.getPerson(id);
+        peopleDetail.push({ id: id, name: person.name });
       }
       response.characters = peopleDetail;
       return response;
