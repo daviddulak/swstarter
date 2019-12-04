@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.green.default,
     flexDirection: 'column',
     alignItems: 'center',
+    minWidth: 150,
   },
   disabled: {
     backgroundColor: Colors.grey.default,

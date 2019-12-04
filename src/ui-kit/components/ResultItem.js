@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     paddingBottom: 19.5,
     marginBottom: 13.5,
     paddingTop: 6,
+    minWidth: 150,
   },
   heading: {
     paddingBottom: 15,
