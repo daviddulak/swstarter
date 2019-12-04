@@ -29,19 +29,3 @@ or
 ```bash
 $ cd scripts && node blueprint.js screen classname
 ``` 
-
-
-
-
-
-
-After upgrading to Xcode 10.2 this needs to be done if you are still using RN 0.53
-
-open  
-`node_modules/react-native/local-cli/runIOS/findMatchingSimulator.js`
-
-replace  
-`if (version.indexOf('iOS') !== 0)`  
-with  
-`if (version.indexOf('com.apple.CoreSimulator.SimRuntime.iOS') !== 0)`
-
