@@ -5,7 +5,7 @@ import {Colors} from '../Colors';
 
 class StandardSubText extends PureComponent {
   render() {
-    return <Text style={styles.style}>{this.props.children}</Text>;
+    return <Text style={[styles.style, this.props.style]}>{this.props.children}</Text>;
   }
 }
 

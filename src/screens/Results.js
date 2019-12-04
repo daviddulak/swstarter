@@ -3,6 +3,7 @@ import {View, StyleSheet, SafeAreaView} from 'react-native';
 import {Navigation} from 'react-native-navigation';
 import {swapi} from '../services/swapi';
 import {H1, ResultItem, StandardSubText, ScreenContainer} from '../ui-kit';
+import {Common} from '../utils/Common';
 
 export class Results extends Component {
   constructor(props) {
@@ -13,12 +14,10 @@ export class Results extends Component {
     };
   }
   handlePressDetails = (url) => () => {
-    let parts = url.split('/');
-    let id = parts[parts.length - 2];
     Navigation.push(this.props.componentId, {
       component: {
         name: this.props.queryType === 'people' ? 'PersonDetail' : 'FilmDetail',
-        passProps: {id: id},
+        passProps: {id: Common.idFromUrl(url)},
       },
     });
   };
@@ -42,13 +41,13 @@ export class Results extends Component {
     if (!this.state.searchComplete) {
       return (
         <View style={styles.infoContainer}>
-          <StandardSubText>Searching…</StandardSubText>
+          <StandardSubText style={styles.centeredText}>Searching…</StandardSubText>
         </View>
       );
     } else if (this.state.results.length === 0) {
       return (
         <View style={styles.infoContainer}>
-          <StandardSubText>
+          <StandardSubText style={styles.centeredText}>
             There are zero matches. Use the form to search for People or Movies.
           </StandardSubText>
         </View>
@@ -57,7 +56,8 @@ export class Results extends Component {
       return (
         <>
           {this.state.results.map((item, index) => {
-            return <ResultItem onPress={this.handlePressDetails(item.url)} key={`item-${index}`}>{item.name}</ResultItem>;
+            const title = this.props.queryType === 'people' ? item.name : item.title;
+            return <ResultItem onPress={this.handlePressDetails(item.url)} key={`item-${index}`}>{title}</ResultItem>;
           })}
         </>
       );
@@ -77,9 +77,13 @@ export class Results extends Component {
 
 const styles = StyleSheet.create({
   infoContainer: {
-    height: '100%',
+    flex: 1,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    textAlign: 'center',
+  },
+  centeredText: {
+    textAlign: 'center',
   },
 });
