@@ -17,13 +17,32 @@ export class Search extends Component {
       query: '',
       queryType: 'people',
     };
+    Navigation.events().bindComponent(this);
   }
+
+  static options(passProps) {
+    return {
+      topBar: {
+        leftButtons: {
+          id: 'stories',
+          icon: require('../ui-kit/assets/gears.png')
+        }
+      }
+    };
+  }
+
+  navigationButtonPressed({ buttonId }) {
+    console.log(buttonId);
+    Navigation.push(this.props.componentId, {component: {name: 'StoryBook'}});
+  }
+
   handleTextFieldChange = text => {
     this.setState({
       hasValue: text && text !== '',
       query: text,
     });
   };
+
   handleTextFieldSubmit = () => {
     Navigation.push(this.props.componentId, {
       component: {
@@ -32,6 +51,7 @@ export class Search extends Component {
       },
     });
   };
+
   handlePeopleRadioChange = newVal => {
     if (newVal) {
       this.setState({
@@ -39,6 +59,7 @@ export class Search extends Component {
       });
     }
   };
+
   handleFilmsRadioChange = newVal => {
     if (newVal) {
       this.setState({
@@ -46,6 +67,7 @@ export class Search extends Component {
       });
     }
   };
+
   render() {
     return (
       <SafeAreaView>
@@ -66,6 +88,7 @@ export class Search extends Component {
                 </RadioItem>
               </View>
               <StandardTextInput
+                placeholder={this.state.queryType === 'people' ? 'e.g. Chewbacca, Yoda' : 'e.g. A New Hope'}
                 onChange={this.handleTextFieldChange}
                 onSubmit={this.handleTextFieldSubmit}
                 returnKeyType={'search'}
