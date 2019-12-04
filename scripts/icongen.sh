@@ -185,7 +185,6 @@ function createIconImage()
   convert ${path} \
     -resize ${iconDimension}x${iconDimension}^ \
     -gravity center \
-    -extent ${iconDimension}x${iconDimension} \
     -unsharp 0x1 \
     ${fileName}
 }
