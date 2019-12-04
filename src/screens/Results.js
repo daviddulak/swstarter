@@ -50,7 +50,10 @@ export class Results extends Component {
       return (
         <View style={styles.infoContainer}>
           <StandardSubText style={styles.centeredText}>
-            There are zero matches. Use the form to search for People or Movies.
+            There are zero matches.
+          </StandardSubText> 
+          <StandardSubText style={styles.centeredText}>
+            Use the form to search for People or Movies.
           </StandardSubText>
         </View>
       );
@@ -80,7 +83,7 @@ export class Results extends Component {
 const styles = StyleSheet.create({
   infoContainer: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
