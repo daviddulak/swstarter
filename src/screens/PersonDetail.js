@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {View, StyleSheet, SafeAreaView} from 'react-native';
+import {Navigation} from 'react-native-navigation';
+import {swapi} from '../services/swapi';
 import {
   StandardText,
   StandardTextLink,
@@ -10,11 +12,33 @@ import {
 } from '../ui-kit';
 
 export class PersonDetail extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      item: {},
+    };
+  }
+  handleBackToSearch = () => {
+    Navigation.popToRoot(this.props.componentId);
+  }
+  componentDidMount() {
+    swapi
+      .getPerson(this.props.id)
+      .then(response => {
+        console.log(response);
+        this.setState({
+          item: response,
+        });
+      })
+      .catch(response => {
+        console.log(response);
+      });
+  }
   render() {
     return (
       <SafeAreaView>
         <ScreenContainer>
-          <H1>Obi-wan</H1>
+          <H1>{this.state.item.name}</H1>
           <View style={styles.section}>
             <H2 withHorizontalRule>Details</H2>
             <StandardText>
@@ -26,9 +50,11 @@ export class PersonDetail extends Component {
             <H2 withHorizontalRule>Movies</H2>
             <StandardTextLink>Return of the Jedi</StandardTextLink>
           </View>
-          <StandardButton onPress={this.handleTextFieldSubmit}>
-            Back To Search
-          </StandardButton>
+          <View style={styles.section}>
+            <StandardButton onPress={this.handleBackToSearch}>
+              Back To Search
+            </StandardButton>
+          </View>
         </ScreenContainer>
       </SafeAreaView>
     );

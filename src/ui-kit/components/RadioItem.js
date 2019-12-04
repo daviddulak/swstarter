@@ -10,6 +10,13 @@ class RadioItem extends PureComponent {
       selected: this.props.selected,
     };
   }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.selected !== this.props.selected) {
+      this.setState({
+        selected: this.props.selected,
+      });
+    }
+  }
   onPress = () => {
     this.props.onChange(!this.state.selected);
     this.setState({

@@ -1,37 +1,57 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+import {Navigation} from 'react-native-navigation';
 
-import React, {Component} from 'react';
 import {Search} from '../screens/Search';
-import {StoryBook} from '../screens/StoryBook';
-import {Results} from '../screens/Results';
 import {FilmDetail} from '../screens/FilmDetail';
 import {PersonDetail} from '../screens/PersonDetail';
-import {swapi} from '../services/swapi';
+import {Results} from '../screens/Results';
+import {StoryBook} from '../screens/StoryBook';
 
-class App extends Component {
-  componentDidMount() {
-    swapi.getAllPeople().then(response => {
-      console.log(response);
-    });
-    swapi.getPerson(1).then(response => {
-      console.log(response);
-    });
-    swapi.getAllFilms().then(response => {
-      console.log(response);
-    });
-    swapi.getFilm(1).then(response => {
-      console.log(response);
-    });
-  }
-  render() {
-    return <StoryBook />;
-  }
-}
+import {Colors, Header} from '../ui-kit';
+console.disableYellowBox = true;
 
-export default App;
+Navigation.registerComponent('Search', () => Search);
+Navigation.registerComponent('FilmDetail', () => FilmDetail);
+Navigation.registerComponent('PersonDetail', () => PersonDetail);
+Navigation.registerComponent('Results', () => Results);
+Navigation.registerComponent('StoryBook', () => StoryBook);
+Navigation.registerComponent('HeaderBackground', () => Header);
+
+Navigation.events().registerAppLaunchedListener(() => {
+  Navigation.setDefaultOptions({
+    topBar: {
+      leftButtonColor: Colors.green.default,
+      drawBehind: true,
+      background: {
+        color: 'white',
+        translucent: true,
+        blur: false,
+      },
+      title: {
+        text: 'SWStarter',
+        fontSize: 18,
+        color: Colors.green.default,
+        fontFamily: 'Poppins-Bold',
+      },
+      noBorder: false,
+      backButton: {
+        title: 'Back',
+        color: Colors.green.default,
+        showTitle: false,
+      },
+    },
+  });
+
+  Navigation.setRoot({
+    root: {
+      stack: {
+        children: [
+          {
+            component: {
+              name: 'Search',
+            },
+          },
+        ],
+      },
+    },
+  });
+});

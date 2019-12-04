@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import {View, StyleSheet, SafeAreaView} from 'react-native';
+import {Navigation} from 'react-native-navigation';
+import {swapi} from '../services/swapi';
 import {
   StandardText,
   StandardTextLink,
@@ -10,26 +12,39 @@ import {
 } from '../ui-kit';
 
 export class FilmDetail extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      item: {},
+    };
+  }
+  handleBackToSearch = () => {
+    Navigation.popToRoot(this.props.componentId);
+  }
+  componentDidMount() {
+    swapi
+      .getFilm(this.props.id)
+      .then(response => {
+        console.log(response);
+        this.setState({
+          item: response,
+        });
+      })
+      .catch(response => {
+        console.log(response);
+      });
+  }
   render() {
     return (
       <SafeAreaView>
         <ScreenContainer>
-          <H1>Obi-wan</H1>
+          <H1>{this.state.item.title}</H1>
           <View style={styles.section}>
             <H2 withHorizontalRule>Opening Crawl</H2>
-            <StandardText>
-              Luke Skywalker has returned to his home planet of Tatooine in an
-              attempt to rescue his friend Han Solo from the clutches of the
-              vile gangster Jabba the Hutt. Little does Luke know that the
-              GALACTIC EMPIRE has secretly begun construction on a new armored
-              space station even more powerful than the first dreaded Death
-              Star. When completed, this ultimate weapon will spell certain doom
-              for the small band of rebels struggling to restore freedom to the
-              galaxy...
-            </StandardText>
+            <StandardText>{this.state.item.opening_crawl}</StandardText>
           </View>
           <View style={styles.section}>
-            <H2 withHorizontalRule>Opening Crawl</H2>
+            <H2 withHorizontalRule>Characters</H2>
             <StandardTextLink>
               Luke Skywalker, Jabba Desiliijiic Tiure, Wedge Antilles, Jek Tono
               Porkins, Raymus Antilles, C-3PO, R2-D2, Darth Vader, Bib Fortuna,
@@ -37,9 +52,11 @@ export class FilmDetail extends Component {
               Darklight, Obi-Wan Kenobi, Wilhuff Tarkin, Chewbacca, Han Solo
             </StandardTextLink>
           </View>
-          <StandardButton onPress={this.handleTextFieldSubmit}>
-            Back To Search
-          </StandardButton>
+          <View style={styles.section}>
+            <StandardButton onPress={this.handleBackToSearch}>
+              Back To Search
+            </StandardButton>
+          </View>
         </ScreenContainer>
       </SafeAreaView>
     );

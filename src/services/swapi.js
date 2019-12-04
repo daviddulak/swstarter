@@ -13,6 +13,20 @@ const timeout = 70 * 1000;
 const baseURL = 'https://swapi.co/api/';
 
 export class swapi {
+  static async search(queryType, query) {
+    const url = `${queryType}/?search=${query}`;
+    try {
+      const response = await axios.request({
+        method: 'get',
+        baseURL: baseURL,
+        url: url,
+        timeout: timeout,
+      });
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
+  }
   static async getAllPeople() {
     const url = 'people/';
     try {

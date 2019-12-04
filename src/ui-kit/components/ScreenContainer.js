@@ -8,7 +8,6 @@ class ScreenContainer extends PureComponent {
   render() {
     return (
       <View style={styles.container}>
-        <Header />
         <ScrollView style={styles.contentContainer}>
           {this.props.children}
         </ScrollView>

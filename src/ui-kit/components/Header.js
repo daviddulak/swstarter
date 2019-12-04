@@ -5,11 +5,7 @@ import {Colors} from '../Colors';
 
 class Header extends PureComponent {
   render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.heading}>SWStarter</Text>
-      </View>
-    );
+    return <View pointerEvents={'none'} style={styles.container} />;
   }
 }
 
@@ -19,17 +15,9 @@ Header.defaultProps = {};
 
 const styles = StyleSheet.create({
   container: {
-    height: 57,
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
+    height: 44,
     borderBottomWidth: 1,
     borderBottomColor: Colors.green.default,
-  },
-  heading: {
-    fontFamily: 'Poppins-Bold',
-    fontSize: 18,
-    color: Colors.green.default,
   },
 });
 
