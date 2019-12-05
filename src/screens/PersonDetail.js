@@ -22,16 +22,16 @@ export class PersonDetail extends Component {
 
   handleBackToSearch = () => {
     Navigation.popToRoot(this.props.componentId);
-  }
+  };
 
-  handlePressItem = (item) => () => {
+  handlePressItem = item => () => {
     Navigation.push(this.props.componentId, {
       component: {
         name: 'FilmDetail',
-        passProps: { id: item.id },
+        passProps: {id: item.id},
       },
     });
-  }
+  };
 
   componentDidMount() {
     if (this.props.id) {
@@ -60,19 +60,49 @@ export class PersonDetail extends Component {
               <View style={styles.section}>
                 <H2 withHorizontalRule>Details</H2>
                 <View style={styles.row}>
-                  <StandardText>{`Birth Year: ${get(this.state, 'item.birth_year', '···')}`}</StandardText>
-                  <StandardText>{`Gender: ${get(this.state, 'item.gender', '···')}`}</StandardText>
-                  <StandardText>{`Eye Color: ${get(this.state, 'item.eye_color', '···')}`}</StandardText> 
-                  <StandardText>{`Hair Color: ${get(this.state, 'item.hair_color', '···')}`}</StandardText>
-                  <StandardText>{`Height: ${get(this.state, 'item.height', '···')}`}</StandardText> 
-                  <StandardText>{`Mass: ${get(this.state, 'item.mass', '···')}`}</StandardText>
+                  <StandardText>{`Birth Year: ${get(
+                    this.state,
+                    'item.birth_year',
+                    '···',
+                  )}`}</StandardText>
+                  <StandardText>{`Gender: ${get(
+                    this.state,
+                    'item.gender',
+                    '···',
+                  )}`}</StandardText>
+                  <StandardText>{`Eye Color: ${get(
+                    this.state,
+                    'item.eye_color',
+                    '···',
+                  )}`}</StandardText>
+                  <StandardText>{`Hair Color: ${get(
+                    this.state,
+                    'item.hair_color',
+                    '···',
+                  )}`}</StandardText>
+                  <StandardText>{`Height: ${get(
+                    this.state,
+                    'item.height',
+                    '···',
+                  )}`}</StandardText>
+                  <StandardText>{`Mass: ${get(
+                    this.state,
+                    'item.mass',
+                    '···',
+                  )}`}</StandardText>
                 </View>
               </View>
               <View style={styles.section}>
                 <H2 withHorizontalRule>Movies</H2>
                 <View style={styles.inline}>
                   {itemArray.map((item, index) => {
-                    return <StandardTextLink onPress={this.handlePressItem(item)} key={`item-${index}`}>{`${item.name}, `}</StandardTextLink>;
+                    return (
+                      <StandardTextLink
+                        onPress={this.handlePressItem(item)}
+                        key={`item-${index}`}>{`${
+                        item.name
+                      }, `}</StandardTextLink>
+                    );
                   })}
                 </View>
               </View>
@@ -100,6 +130,6 @@ const styles = StyleSheet.create({
   },
   inline: {
     flexDirection: 'row',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
   },
 });

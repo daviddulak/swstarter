@@ -9,9 +9,7 @@ class ScreenContainer extends PureComponent {
     return (
       <View style={styles.container}>
         <ScrollView style={styles.contentContainer}>
-          <View style={styles.inner}>
-            {this.props.children}
-          </View>
+          <View style={styles.inner}>{this.props.children}</View>
         </ScrollView>
       </View>
     );
@@ -31,7 +29,10 @@ const styles = StyleSheet.create({
     padding: 30,
   },
   inner: {
-    minHeight: Platform.OS === 'android' ? Dimensions.get("window").height - 140 : Dimensions.get("screen").height - 180,
+    minHeight:
+      Platform.OS === 'android'
+        ? Dimensions.get('window').height - 140
+        : Dimensions.get('screen').height - 180,
     marginBottom: Platform.OS === 'android' ? 60 : 0,
   },
 });

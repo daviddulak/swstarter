@@ -28,14 +28,16 @@ export class Search extends Component {
       topBar: {
         leftButtons: {
           id: 'stories',
-          icon: require('../ui-kit/assets/gears.png')
-        }
-      }
+          icon: require('../ui-kit/assets/gears.png'),
+        },
+      },
     };
   }
 
-  navigationButtonPressed({ buttonId }) {
-    Navigation.push(this.props.componentId, {component: {name: 'StoryBook'}});
+  navigationButtonPressed({buttonId}) {
+    if (buttonId === 'stories') {
+      Navigation.push(this.props.componentId, {component: {name: 'StoryBook'}});
+    }
   }
 
   handleTextFieldChange = text => {
@@ -90,7 +92,11 @@ export class Search extends Component {
                 </RadioItem>
               </View>
               <StandardTextInput
-                placeholder={this.state.queryType === 'people' ? 'e.g. Chewbacca, Yoda' : 'e.g. A New Hope'}
+                placeholder={
+                  this.state.queryType === 'people'
+                    ? 'e.g. Chewbacca, Yoda'
+                    : 'e.g. A New Hope'
+                }
                 onChange={this.handleTextFieldChange}
                 onSubmit={this.handleTextFieldSubmit}
                 returnKeyType={'search'}
@@ -115,7 +121,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   contentAboveContainer: {
-    paddingBottom: 30
+    paddingBottom: 30,
   },
   radioContainer: {
     flexDirection: 'row',

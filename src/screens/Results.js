@@ -13,7 +13,7 @@ export class Results extends Component {
       results: [],
     };
   }
-  handlePressDetails = (url) => () => {
+  handlePressDetails = url => () => {
     Navigation.push(this.props.componentId, {
       component: {
         name: this.props.queryType === 'people' ? 'PersonDetail' : 'FilmDetail',
@@ -43,7 +43,9 @@ export class Results extends Component {
     if (!this.state.searchComplete) {
       return (
         <View style={styles.infoContainer}>
-          <StandardSubText style={styles.centeredText}>Searching…</StandardSubText>
+          <StandardSubText style={styles.centeredText}>
+            Searching…
+          </StandardSubText>
         </View>
       );
     } else if (this.state.results.length === 0) {
@@ -51,7 +53,7 @@ export class Results extends Component {
         <View style={styles.infoContainer}>
           <StandardSubText style={styles.centeredText}>
             There are zero matches.
-          </StandardSubText> 
+          </StandardSubText>
           <StandardSubText style={styles.centeredText}>
             Use the form to search for People or Movies.
           </StandardSubText>
@@ -61,8 +63,15 @@ export class Results extends Component {
       return (
         <>
           {this.state.results.map((item, index) => {
-            const title = this.props.queryType === 'people' ? item.name : item.title;
-            return <ResultItem onPress={this.handlePressDetails(item.url)} key={`item-${index}`}>{title}</ResultItem>;
+            const title =
+              this.props.queryType === 'people' ? item.name : item.title;
+            return (
+              <ResultItem
+                onPress={this.handlePressDetails(item.url)}
+                key={`item-${index}`}>
+                {title}
+              </ResultItem>
+            );
           })}
         </>
       );

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {View, StyleSheet, SafeAreaView} from 'react-native';
 import {Navigation} from 'react-native-navigation';
 import {swapi} from '../services/swapi';
-import { get } from 'lodash';
+import {get} from 'lodash';
 import {
   StandardText,
   StandardTextLink,
@@ -22,16 +22,16 @@ export class FilmDetail extends Component {
 
   handleBackToSearch = () => {
     Navigation.popToRoot(this.props.componentId);
-  }
+  };
 
-  handlePressItem = (item) => () => {
+  handlePressItem = item => () => {
     Navigation.push(this.props.componentId, {
       component: {
         name: 'PersonDetail',
-        passProps: { id: item.id },
+        passProps: {id: item.id},
       },
     });
-  }
+  };
 
   componentDidMount() {
     if (this.props.id) {
@@ -59,13 +59,21 @@ export class FilmDetail extends Component {
               <H1>{get(this.state, 'item.title', '···')}</H1>
               <View style={styles.section}>
                 <H2 withHorizontalRule>Opening Crawl</H2>
-                <StandardText>{get(this.state, 'item.opening_crawl', '···')}</StandardText>
+                <StandardText>
+                  {get(this.state, 'item.opening_crawl', '···')}
+                </StandardText>
               </View>
               <View style={styles.section}>
                 <H2 withHorizontalRule>Characters</H2>
                 <View style={styles.inline}>
                   {itemArray.map((item, index) => {
-                    return <StandardTextLink onPress={this.handlePressItem(item)} key={`item-${index}`}>{`${item.name}, `}</StandardTextLink>;
+                    return (
+                      <StandardTextLink
+                        onPress={this.handlePressItem(item)}
+                        key={`item-${index}`}>{`${
+                        item.name
+                      }, `}</StandardTextLink>
+                    );
                   })}
                 </View>
               </View>
@@ -93,6 +101,6 @@ const styles = StyleSheet.create({
   },
   inline: {
     flexDirection: 'row',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
   },
 });
