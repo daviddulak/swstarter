@@ -17,7 +17,10 @@ export class Search extends Component {
       query: '',
       queryType: 'people',
     };
-    Navigation.events().bindComponent(this);
+    console.log(this);
+    if (this.props.componentId) {
+      Navigation.events().bindComponent(this);
+    }
   }
 
   static options(passProps) {
@@ -32,7 +35,6 @@ export class Search extends Component {
   }
 
   navigationButtonPressed({ buttonId }) {
-    console.log(buttonId);
     Navigation.push(this.props.componentId, {component: {name: 'StoryBook'}});
   }
 
