@@ -8,7 +8,8 @@
     "installandroid": "react-native run-android --variant=release",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "postinstall": "./scripts/postInstall.sh"
   },
   "dependencies": {
     "react": "16.9.0",
@@ -37,10 +38,5 @@
   },
   "jest": {
     "preset": "react-native"
-  },
-  "rnpm": {
-    "assets": [
-      "./src/ui-kit/assets/fonts"
-    ]
   }
 }
